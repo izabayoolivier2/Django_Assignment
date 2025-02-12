@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="font-size: 36px; color: #1D3557; animation: fadeIn 1.5s ease-in-out;">
+    {% if form.instance.pk %}Edit Task{% else %}Create Task{% endif %}
+</h2>
+<form method="post" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); animation: fadeIn 1.5s ease-in-out;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="background: #2a9d8f; color: white; padding: 12px 24px; border-radius: 25px; border: none; font-size: 18px; transition: 0.3s;">Save Task</button>
+</form>
+
+<br>
+<a href="{% url 'task_list' %}" style="font-size: 18px; color: #1D3557; text-decoration: none; animation: fadeIn 1.5s ease-in-out;">Cancel</a>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}

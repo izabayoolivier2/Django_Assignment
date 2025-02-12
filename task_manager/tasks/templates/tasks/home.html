@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager | Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #A8D0E6, #F1FAEE); /* Cool icy blue to light winter white */
+            color: #1D3557; /* Dark icy blue */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .container {
+            margin: 100px auto;
+            max-width: 700px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        h1 {
+            font-size: 48px;
+            color: #457B9D; /* Light blue-gray */
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #1D3557; /* Dark icy blue */
+        }
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 25px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .btn-login {
+            background: #1D3557; /* Dark icy blue */
+            color: white;
+        }
+        .btn-register {
+            background: #F1FAEE; /* Winter white */
+            color: #1D3557; /* Dark icy blue */
+            border: 2px solid #1D3557;
+        }
+        .btn:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+        .image-container {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: floatUp 3s infinite alternate;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatUp {
+            from { transform: translateX(-50%) translateY(10px); }
+            to { transform: translateX(-50%) translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Task Manager Application</h1>
+        <p>Organize your tasks with ease, stay focused, and achieve your goals every day!</p>
+        <a href="{% url 'login' %}" class="btn btn-login">Login to Your Account</a>
+        <a href="{% url 'register' %}" class="btn btn-register">Create a New Account</a>
+    </div>
+    <div class="image-container">
+        <img src="/static/images/task_management_backgraung_image.jpeg" alt="Task Management Illustration" width="300">
+    </div>
+</body>
+</html>

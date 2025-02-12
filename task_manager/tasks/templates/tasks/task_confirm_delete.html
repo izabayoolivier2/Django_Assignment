@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="font-size: 36px; color: #1D3557;">Are You Sure?</h2>
+<p style="font-size: 20px; color: #457B9D;">You're about to delete the task: <strong>"{{ task.title }}"</strong></p>
+
+<form method="post" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); animation: fadeIn 1.5s ease-in-out;">
+    {% csrf_token %}
+    <button type="submit" style="background: #e63946; color: white; padding: 12px 24px; border-radius: 25px; border: none; font-size: 18px; transition: 0.3s;">Yes, Delete</button>
+</form>
+
+<a href="{% url 'task_list' %}" style="display: inline-block; margin-top: 20px; font-size: 18px; color: #1D3557; text-decoration: none;">Cancel</a>
+{% endblock %}

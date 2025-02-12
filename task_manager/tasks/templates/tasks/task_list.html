@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="font-size: 36px; color: #1D3557; animation: fadeIn 1.5s ease-in-out;">My Tasks</h2>
+
+<!-- Search and Filter Form -->
+<form method="GET" action="{% url 'task_list' %}" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); animation: fadeIn 1.5s ease-in-out;">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search tasks by title or description" style="padding: 8px 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;" /> &nbsp
+    <select name="status" style="padding: 8px 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;">
+        <option value="">All Statuses</option>
+        <option value="Pending" {% if status_filter == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="In Progress" {% if status_filter == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Completed" {% if status_filter == 'Completed' %}selected{% endif %}>Completed</option>
+    </select> &nbsp
+    <button type="submit" style="background: #2a9d8f; color: white; padding: 8px 16px; border-radius: 25px; border: none; font-size: 18px; transition: 0.3s;">Search</button>
+</form>
+
+<br>
+
+<!-- Task List -->
+<ul style="list-style-type: none; padding: 0; animation: fadeIn 1.5s ease-in-out;">
+    {% for task in tasks %}
+        <li style="margin-bottom: 20px; padding: 15px; background: #f1f1f1; border-radius: 10px;">
+            <strong style="font-size: 22px; color: #1D3557;"><a href="{% url 'task_detail' task.id %}" style="text-decoration: none; color: inherit;">{{ task.title }}</a></strong> &nbsp &nbsp
+            {% if task.status != 'Completed' %}
+                <a href="{% url 'mark_as_completed' task.id %}" style="background: #2a9d8f; color: white; padding: 6px 12px; border-radius: 20px; text-decoration: none;">Mark as Completed</a>
+            {% endif %}
+            <p style="font-size: 16px; color: #457B9D;">Due: {{ task.due_date }}</p>
+            <p style="font-size: 16px; color: #457B9D;">Status: {{ task.status }}</p>
+
+            {% if task.user == request.user %}
+                <a href="{% url 'task_edit' task.id %}" style="background: #f4a261; color: white; padding: 8px 16px; border-radius: 25px; text-decoration: none;">Edit Task</a> &nbsp &nbsp &nbsp &nbsp   
+                <form action="{% url 'task_delete' task.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: #e63946; color: white; padding: 8px 16px; border-radius: 25px; border: none; font-size: 18px; transition: 0.3s;">Delete this Task</button>
+                </form>
+                <br><br><br><br><br>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'task_create' %}" style="font-size: 18px; color: #1D3557; text-decoration: none; background: #f4a261; padding: 12px 24px; border-radius: 25px; transition: 0.3s; animation: fadeIn 1.5s ease-in-out;">Create New Task</a>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+{% endblock %}

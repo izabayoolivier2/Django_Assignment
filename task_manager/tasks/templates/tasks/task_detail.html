@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="font-size: 36px; color: #1D3557; animation: fadeIn 1.5s ease-in-out;">{{ task.title }}</h2>
+<p style="font-size: 20px; color: #457B9D; animation: fadeIn 1.5s ease-in-out;">{{ task.description }}</p>
+<p style="font-size: 18px; color: #1D3557; animation: fadeIn 1.5s ease-in-out;">Due: <strong>{{ task.due_date }}</strong></p>
+<p style="font-size: 18px; color: #1D3557; animation: fadeIn 1.5s ease-in-out;">Status: <strong>{{ task.status }}</strong></p>
+
+{% if task.status != 'Completed' %}
+    <a href="{% url 'mark_as_completed' task.id %}" style="background: #2a9d8f; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; transition: 0.3s; animation: fadeIn 1.5s ease-in-out;">Mark Task as Completed</a>
+{% endif %}
+
+<br><br>
+
+{% if task.user == request.user %}
+    <a href="{% url 'task_edit' task.id %}" style="background: #f4a261; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; transition: 0.3s; animation: fadeIn 1.5s ease-in-out;">Edit this Task</a>
+    
+    <form action="{% url 'task_delete' task.id %}" method="post" style="display:inline; margin-left: 20px; animation: fadeIn 1.5s ease-in-out;">
+        {% csrf_token %}
+        <button type="submit" style="background: #e63946; color: white; padding: 10px 20px; border-radius: 25px; border: none; font-size: 18px; transition: 0.3s;">Delete this Task</button>
+    </form>
+{% endif %}
+
+<br><br>
+<a href="{% url 'task_list' %}" style="font-size: 18px; color: #1D3557; text-decoration: none; animation: fadeIn 1.5s ease-in-out;">Back to Task List</a>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}

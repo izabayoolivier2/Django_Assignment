@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Login to Your Account</h2>
+<form method="post" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); animation: fadeIn 1.5s ease-in-out;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="background: #1D3557; color: white; padding: 12px 24px; border-radius: 25px; border: none; font-size: 18px; transition: 0.3s;">Login</button>
+</form>
+<p><a href="{% url 'password_reset' %}" style="font-size: 18px; margin-top: 20px; color: #457B9D;">Forgot your password?</a></p>
+<p style="font-size: 18px; margin-top: 20px; color: #457B9D;">Don't have an account? <a href="{% url 'register' %}" style="color: #1D3557; text-decoration: none;">Register here</a></p>
+{% endblock %}
+
+
+
+<p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
