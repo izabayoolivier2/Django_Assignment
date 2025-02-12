@@ -12,9 +12,13 @@ This is a simple Task Management application built with Django. The application 
 
 
 #Setup Instructions to run the project locally
+
 Python (>=3.8)
+
 pip (Python package manager)
+
 virtualenv (optional but recommended)
+
 Git
 
 
